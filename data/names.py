@@ -17,7 +17,7 @@ STP_FEATURES = ['Płeć', 'Wiek', 'Lokalizacja bólu na początku zachorowania',
                 'Umiejscowienie bolesności uciskowej',
                 'Objaw Blumberga', 'Obrona mięśniowa',
                 'Wzmożone napięcie powłok brzusznych',
-                'Opory patologiczne', 'Objaw Murphy\'ego']
+                'Opory patologiczne', 'Objaw Murphy\'ego', 'Class']
 
 STP_CLASSES = ['Ostre zapalenie wyrostka robaczkowego',
                'Zapalenie uchyłków jelit', 'Niedrożnośc mechaniczna jelit',
