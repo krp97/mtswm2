@@ -28,6 +28,19 @@ def run_grid_search(data, classes):
     return gs.cv_results_
 
 
+def get_avg_test_score(grid_out, dec=2):
+    '''
+    Returns the average of 'mean_test_score' from a grid_search run.
+
+    Parameters:
+        grid_out (dict): Output from a grid search run.
+        dec (int): Specifiy the decimal place alignment of the output value.
+    '''
+    value = grid_out['mean_test_score']
+    percentage = (sum(value)/len(value))*100
+    return float("{0:.2f}".format(percentage))
+
+
 def dump_to_latex(values, headers, filename=None):
     '''
     Dumps a list of tuples into a latex table.
