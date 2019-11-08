@@ -24,7 +24,7 @@ def load_data(csv_path):
 def rank_features(data, classes, sort=True):
     '''
     Returns a dictionary or a list of tuples sorted by value, 
-    where the first element is a feature id and the second,
+    where the first element is the feature_id and the second
     is it's ranking score.
 
     Parameters:
