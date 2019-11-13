@@ -1,5 +1,6 @@
 from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import GridSearchCV, RepeatedKFold
+from sklearn.model_selection import GridSearchCV, RepeatedKFold, train_test_split
+from sklearn.metrics import confusion_matrix
 import feature_ranking as fr
 import os
 from tabulate import tabulate
@@ -43,3 +44,10 @@ def pretty_print_cv(values, headers, texfile=None):
             f.write(latex_out)
     else:
         print(tabulate(table, tablefmt="grid", headers=headers))
+
+
+def get_conf_matrix(x, y, **params):
+    x_train, x_test, y_train, y_test = train_test_split(x, y)
+    model = MLPClassifier(**params).fit(x_train, y_train)
+    y_pred = model.predict(x_test)
+    print(confusion_matrix(y_test, y_pred))
