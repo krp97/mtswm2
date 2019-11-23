@@ -1,9 +1,11 @@
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV, RepeatedKFold, train_test_split
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
 import feature_ranking as fr
 import os
 from tabulate import tabulate
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def run_grid_search(data, classes):
@@ -47,7 +49,12 @@ def pretty_print_cv(values, headers, texfile=None):
 
 
 def get_conf_matrix(x, y, **params):
-    x_train, x_test, y_train, y_test = train_test_split(x, y)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=42)
     model = MLPClassifier(**params).fit(x_train, y_train)
     y_pred = model.predict(x_test)
-    print(confusion_matrix(y_test, y_pred))
+    disp = plot_confusion_matrix(
+        model, x_test, y_test, normalize='true', display_labels=[1, 2, 3, 4, 5, 6, 7, 8], values_format='.2f')
+    disp.ax_.set_title("Znormalizowana macierz konfuzji")
+    disp.ax_.set_xlabel("Etykieta oczekiwana")
+    disp.ax_.set_ylabel("Wynik klasyfikacji")
+    plt.show()

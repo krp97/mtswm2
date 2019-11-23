@@ -59,13 +59,18 @@ def run_experiment(x, y, upper_bound=5):
 
     table_data = parse_into_table(results)
     headers = ['Liczba cech', 'Liczba neuronów', 'Momentum', 'Skuteczność [\%]']
-    clsf.pretty_print_cv(table_data, headers)
+    clsf.pretty_print_cv(table_data, headers, texfile='hello.tex')
 
+
+def print_confusion_matrix(x, y, feature_count):
+    x_new, y_new = fr.rank_n_transform(x, y, 8)
+    clsf.get_conf_matrix(x_new, y_new, hidden_layer_sizes=(20,), solver='adam')
 
 def main():
     csv_path = os.path.join(get_script_path(), 'data/brzuch_dane.csv')
     x, y = fr.load_data(csv_path)
     run_experiment(x, y, upper_bound=3)
+    print_confusion_matrix(x, y, 8)
 
 
 if __name__ == '__main__':
